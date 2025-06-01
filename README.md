@@ -196,41 +196,40 @@ For developers working on the codebase:
 
 ### Authentication Setup
 
-The site is configured to use **GitHub OAuth** for content management access. This means:
+The site uses **GitHub PKCE Authentication** for secure, modern content management access:
 
-- ✅ **CMS Authentication**: Users log in with their GitHub account
-- ✅ **Repository Access**: Content editors need push access to the GitHub repository
-- ✅ **Simple Setup**: No additional authentication servers required
+- ✅ **GitHub PKCE**: Secure authentication without requiring external services
+- ✅ **No OAuth App Required**: PKCE eliminates the need for server-side OAuth handling
+- ✅ **Direct GitHub Integration**: Users authenticate directly with GitHub
+- ✅ **Repository Access Control**: Content editors need push access to the GitHub repository
 
 ### Production Deployment Steps
 
-1. **Update Repository Information**
+1. **Verify Repository Configuration**
    ```yaml
-   # In public/admin/config.yml, update:
+   # In public/admin/config.yml:
    backend:
      name: github
-     repo: your-username/your-repo-name  # Update this
+     repo: fermain/sean.vos.cv  # Verify this matches your repository
      branch: main
+     auth_type: pkce
    ```
 
-2. **GitHub OAuth Application (if deploying to custom domain)**
-   - Only required for non-Netlify hosting
-   - For Netlify: OAuth is handled automatically
+2. **Deploy to GitHub Pages**
+   - Push changes to `main` branch
+   - GitHub Actions automatically builds and deploys
+   - No additional OAuth setup required
 
-3. **Deploy to Platform**
-   - **Netlify**: Connect GitHub repo, auto-deploy on push
-   - **Vercel**: Connect GitHub repo, auto-deploy on push  
-   - **GitHub Pages**: Enable in repository settings
-
-4. **Access Control**
+3. **Access Control**
    - Content editors need **write access** to the GitHub repository
-   - CMS will be accessible at `https://your-domain.com/admin`
-   - Authentication is handled via GitHub login
+   - CMS will be accessible at `https://sean.vos.cv.ferma.in/admin`
+   - Authentication handled via GitHub login with PKCE
 
 ### Content Management Access
 
 - **URL**: `https://sean.vos.cv.ferma.in/admin`
-- **Authentication**: GitHub account with repository access
+- **Authentication**: GitHub account with repository push access
+- **Login Flow**: Direct GitHub authentication (no external providers needed)
 - **Permissions**: Users need write/push access to the repository
 - **Local Development**: Run `pnpm dev` and use local backend mode
 

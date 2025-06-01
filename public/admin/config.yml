@@ -1,8 +1,9 @@
 # Production backend - GitHub OAuth
 backend:
   name: github
-  repo: Fermain/sean.vos.cv  # Update this with the actual GitHub repo
+  repo: fermain/sean.vos.cv  # Update if repository name is different
   branch: main
+  auth_type: pkce
 
 # Local development backend (commented out for production)
 # backend:
@@ -10,6 +11,11 @@ backend:
 #   branch: main
 # local_backend: true
 
+# Remove any Netlify-specific configuration
+# site_url: https://sean.vos.cv.ferma.in
+# display_url: https://sean.vos.cv.ferma.in
+
+publish_mode: editorial_workflow
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
