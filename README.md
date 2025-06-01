@@ -5,8 +5,8 @@ A modern, professional CV website built with Astro, Tailwind CSS 4, and Decap CM
 ## 🚀 Live Site
 
 - **Production**: https://sean.vos.cv.ferma.in
-- **Development**: http://localhost:7008
-- **CMS Admin**: http://localhost:7008/admin (local) | https://sean.vos.cv.ferma.in/admin (production)
+- **Development**: http://localhost:7007
+- **CMS Admin**: http://localhost:7007/admin (local) | https://sean.vos.cv.ferma.in/admin (production)
 
 ## 🏗️ Tech Stack
 
@@ -75,8 +75,8 @@ sean.vos.cv/
    ```
 
 4. **Access the application**
-   - **Website**: http://localhost:7008
-   - **CMS Admin**: http://localhost:7008/admin
+   - **Website**: http://localhost:7007
+   - **CMS Admin**: http://localhost:7007/admin
 
 ## 🎨 Features
 
@@ -115,7 +115,7 @@ sean.vos.cv/
 
 1. **Local Development**
    - Ensure both servers are running (Astro + Decap proxy)
-   - Navigate to http://localhost:7008/admin
+   - Navigate to http://localhost:7007/admin
    - No authentication required in local mode
 
 2. **Content Types**
@@ -229,7 +229,7 @@ The site is configured to use **GitHub OAuth** for content management access. Th
 
 ### Content Management Access
 
-- **URL**: `https://your-site-url.com/admin`
+- **URL**: `https://sean.vos.cv.ferma.in/admin`
 - **Authentication**: GitHub account with repository access
 - **Permissions**: Users need write/push access to the repository
 - **Local Development**: Run `pnpm dev` and use local backend mode
@@ -251,11 +251,57 @@ The site is configured to use **GitHub OAuth** for content management access. Th
 2. Use GitHub Actions for build and deploy
 3. Configure OAuth app for github.io domain
 
+#### GitHub Pages Setup (Detailed)
+
+**Repository Setup:**
+1. Go to repository **Settings** → **Pages**
+2. Under **Source**, select **GitHub Actions**
+3. The workflow will automatically deploy on every push to `main`
+
+**Custom Domain (Optional):**
+1. In **Settings** → **Pages** → **Custom domain**, enter your domain
+2. Update `astro.config.mjs`:
+   ```javascript
+   export default defineConfig({
+     site: 'https://your-custom-domain.com',
+     base: '/',
+     // ... other config
+   });
+   ```
+
+**GitHub Actions Workflow:**
+- ✅ **Official Astro Action** - Uses `withastro/action@v4` for streamlined deployment
+- ✅ **Automatic builds** on push to `main` branch
+- ✅ **Manual deployment** via Actions tab
+- ✅ **Built-in optimization** with Node.js 20 and pnpm support
+- ✅ **Simplified configuration** - handles setup, caching, and build automatically
+
+**Deployment URLs:**
+- **Production Site**: `https://sean.vos.cv.ferma.in`
+- **CMS Admin**: `https://sean.vos.cv.ferma.in/admin`
+- **GitHub Pages Fallback**: `https://fermain.github.io/sean.vos.cv` (if custom domain not configured)
+
+**Custom Domain Setup (sean.vos.cv.ferma.in):**
+1. **CNAME File**: Already included in `public/CNAME` (contains: `sean.vos.cv.ferma.in`)
+2. In **Settings** → **Pages** → **Custom domain**, enter: `sean.vos.cv.ferma.in`
+3. GitHub will detect the CNAME file automatically
+4. Ensure DNS records point to GitHub Pages:
+   ```
+   CNAME: sean.vos.cv.ferma.in → fermain.github.io
+   ```
+5. Enable **"Enforce HTTPS"** for security
+
+**First Deployment:**
+1. Push code to `main` branch
+2. GitHub Actions will automatically build and deploy
+3. Check **Actions** tab for build status
+4. Site will be available at: **https://sean.vos.cv.ferma.in**
+
 ## 📝 Content Management
 
 ### For Content Editors (like Sean)
 
-1. **Access the CMS**: Go to `https://site-url.com/admin`
+1. **Access the CMS**: Go to `https://sean.vos.cv.ferma.in/admin`
 2. **Login**: Use GitHub account (must have repository access)
 3. **Edit Content**: Use the visual editor to update CV information
 4. **Publish**: Changes are automatically saved and deployed
@@ -265,11 +311,28 @@ The site is configured to use **GitHub OAuth** for content management access. Th
 | Command | Action |
 |---------|--------|
 | `pnpm install` | Install dependencies |
-| `pnpm dev` | Start development server (port 7008) |
+| `pnpm dev` | Start development server (port 7007) |
 | `pnpm build` | Build for production |
 | `pnpm preview` | Preview production build |
 | `npx decap-server` | Start CMS proxy server |
 | `pnpm astro --help` | Show Astro CLI help |
+
+### Deployment Commands
+
+| Command | Action |
+|---------|--------|
+| **GitHub Actions** | Automatic deployment on push to `main` |
+| **Manual Deploy** | Go to **Actions** tab → **Deploy to GitHub Pages** → **Run workflow** |
+| **Build Status** | Check **Actions** tab for deployment status |
+| **Site URL** | Visit deployed site at https://sean.vos.cv.ferma.in |
+
+### Development & Deployment Workflow
+
+1. **Local Development**: `pnpm dev` (with local CMS backend)
+2. **Content Editing**: Use CMS at `/admin` endpoint  
+3. **Build & Test**: `pnpm build && pnpm preview`
+4. **Deploy**: Push to `main` branch (auto-deploys via GitHub Actions)
+5. **Monitor**: Check **Actions** tab for deployment status
 
 ## 🤝 Contributing
 
