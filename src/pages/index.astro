@@ -1,6 +1,59 @@
 ---
 // Import our CSS styles
 import '../styles/main.css';
+import { getCollection, getEntry } from 'astro:content';
+
+// Get all content from collections
+const personalDetails = await getEntry('personal', 'details');
+const certificateSettings = await getEntry('settings', 'certificates');
+const qualifications = await getCollection('qualifications');
+const employment = await getCollection('employment');
+const education = await getCollection('education');
+
+// Sort employment by start date (most recent first)
+const sortedEmployment = employment.sort((a, b) => {
+	const dateA = new Date(a.data.startDate);
+	const dateB = new Date(b.data.startDate);
+	return dateB.getTime() - dateA.getTime();
+});
+
+// Sort qualifications by issue date (most recent first)
+const sortedQualifications = qualifications.sort((a, b) => {
+	if (!a.data.issueDate || !b.data.issueDate) return 0;
+	const dateA = new Date(a.data.issueDate);
+	const dateB = new Date(b.data.issueDate);
+	return dateB.getTime() - dateA.getTime();
+});
+
+// Group qualifications by category
+const qualificationsByCategory = sortedQualifications.reduce((acc, qual) => {
+	const category = qual.data.category || 'Other';
+	if (!acc[category]) acc[category] = [];
+	acc[category].push(qual);
+	return acc;
+}, {} as Record<string, typeof qualifications>);
+
+// Format date helper
+function formatDate(dateString: string | undefined): string {
+	if (!dateString) return 'Present';
+	const date = new Date(dateString);
+	return date.toLocaleDateString('en-GB', { 
+		year: 'numeric', 
+		month: 'short' 
+	});
+}
+
+// Format date range helper
+function formatDateRange(startDate: string, endDate?: string): string {
+	const start = formatDate(startDate);
+	const end = endDate ? formatDate(endDate) : 'Present';
+	return `${start} – ${end}`;
+}
+
+// Get certificate images from settings, sorted by order
+const certificateImages = certificateSettings?.data.certificateImages
+	?.sort((a, b) => (a.order || 0) - (b.order || 0)) || [];
+
 // Page imports and logic will go here
 ---
 
@@ -10,111 +63,240 @@ import '../styles/main.css';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Sean Vos - Curriculum Vitae</title>
-		<meta name="description" content="Professional CV of Sean Vos - Commercial Diver and Marine Professional" />
+		<title>Sean Sebastian Vos - Professional CV</title>
+		<meta name="description" content="Professional CV of Sean Sebastian Vos - Commercial Diver and Marine Professional" />
 	</head>
 	<body class="font-family-cv-sans bg-cv-background text-cv-primary">
-		<main class="max-w-4xl mx-auto p-8 print:p-0">
+		<div class="cv-document">
+			
 			<!-- Header Section -->
-			<header class="text-center mb-8 cv-section">
-				<h1 class="text-4xl font-bold mb-2 text-cv-primary">Sean Sebastian Vos</h1>
-				<p class="text-cv-secondary text-lg">Commercial Diver & Marine Professional</p>
+			<header class="mb-8">
+				<div class="text-center mb-8">
+					<h1 class="cv-h1 mb-4">Curriculum Vitae</h1>
+					<h2 class="text-2xl font-medium mb-8">{personalDetails?.data.name}</h2>
+				</div>
 				
-				<!-- Navigation - hidden when printing -->
-				<nav class="mt-6 no-print">
-					<div class="flex justify-center space-x-6 text-sm">
-						<a href="#personal" class="text-cv-secondary hover:text-cv-primary transition-colors">Personal</a>
-						<a href="#qualifications" class="text-cv-secondary hover:text-cv-primary transition-colors">Qualifications</a>
-						<a href="#employment" class="text-cv-secondary hover:text-cv-primary transition-colors">Employment</a>
-						<a href="#certificates" class="text-cv-secondary hover:text-cv-primary transition-colors">Certificates</a>
-						<a href="/admin" class="text-cv-accent hover:text-cv-primary transition-colors">Admin</a>
-					</div>
-				</nav>
+				<!-- Personal Particulars Table -->
+				<div class="mb-8">
+					<h2 class="cv-h2">Personal Particulars</h2>
+					<table class="cv-table">
+						<tbody>
+							<tr>
+								<td class="cv-table-label">Name</td>
+								<td class="cv-table-value">{personalDetails?.data.name}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Address</td>
+								<td class="cv-table-value">{personalDetails?.data.address}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Email Address</td>
+								<td class="cv-table-value">{personalDetails?.data.email}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Contact Numbers</td>
+								<td class="cv-table-value">{personalDetails?.data.phone}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Passport Number</td>
+								<td class="cv-table-value">{personalDetails?.data.passport}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Date of Birth</td>
+								<td class="cv-table-value">{formatDate(personalDetails?.data.dateOfBirth)}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Nationality</td>
+								<td class="cv-table-value">{personalDetails?.data.nationality}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Sex</td>
+								<td class="cv-table-value">{personalDetails?.data.sex}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Marital Status</td>
+								<td class="cv-table-value">{personalDetails?.data.maritalStatus}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Dependants</td>
+								<td class="cv-table-value">{personalDetails?.data.dependants}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Languages</td>
+								<td class="cv-table-value">{personalDetails?.data.languages}</td>
+							</tr>
+							<tr>
+								<td class="cv-table-label">Health</td>
+								<td class="cv-table-value">{personalDetails?.data.health}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</header>
 
-			<!-- Personal Particulars Section -->
-			<section id="personal" class="cv-section">
-				<h2 class="cv-section-title">Personal Particulars</h2>
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-					<div>
-						<p><strong>Name:</strong> Sean Sebastian Vos</p>
-						<p><strong>Address:</strong> 17 High Street, Mount Moreland<br>KwaZulu Natal, South Africa 4339</p>
-						<p><strong>Email:</strong> vos.sean@gmail.com</p>
-						<p><strong>Contact:</strong> +27 680533072 Mobile</p>
-					</div>
-					<div>
-						<p><strong>Passport:</strong> A09400928</p>
-						<p><strong>Date of Birth:</strong> 12 December 1975</p>
-						<p><strong>Nationality:</strong> South African</p>
-						<p><strong>Sex:</strong> Male</p>
-						<p><strong>Marital Status:</strong> Single</p>
-						<p><strong>Dependants:</strong> One</p>
-						<p><strong>Languages:</strong> English/Afrikaans</p>
-						<p><strong>Health:</strong> Excellent</p>
-					</div>
-				</div>
+			<!-- Education -->
+			<section class="cv-section mb-8">
+				<h2 class="cv-h2">Education</h2>
+				
+				<table class="cv-table">
+					<tbody>
+						{education.map((edu) => (
+							<>
+								<tr>
+									<td class="cv-table-label">Last School Attended</td>
+									<td class="cv-table-value">{edu.data.institution}</td>
+								</tr>
+								<tr>
+									<td class="cv-table-label">Highest Standard Passed</td>
+									<td class="cv-table-value">{edu.data.qualification}</td>
+								</tr>
+								{edu.data.yearCompleted && (
+									<tr>
+										<td class="cv-table-label">Year Completed</td>
+										<td class="cv-table-value">{formatDate(edu.data.yearCompleted)}</td>
+									</tr>
+								)}
+								{edu.data.location && (
+									<tr>
+										<td class="cv-table-label">Location</td>
+										<td class="cv-table-value">{edu.data.location}</td>
+									</tr>
+								)}
+							</>
+						))}
+					</tbody>
+				</table>
 			</section>
 
-			<!-- Qualifications Section -->
-			<section id="qualifications" class="cv-section">
-				<h2 class="cv-section-title">Qualifications</h2>
-				<div class="space-y-4">
-					<!-- Sample qualification - this will be dynamic -->
-					<div class="cv-item">
-						<h3 class="cv-item-title">IMCA Diver Medic-DMT</h3>
-						<p class="cv-item-date">Expiry Date: 04/04/2026</p>
+			<!-- Professional Qualifications -->
+			<section class="cv-section mb-8">
+				<h2 class="cv-h2">Qualifications</h2>
+				
+				{Object.entries(qualificationsByCategory).map(([category, quals]) => (
+					<div class="mb-6">
+						<h3 class="cv-h3">{category}</h3>
+						<table class="cv-table">
+							<thead>
+								<tr>
+									<th>Qualification</th>
+									<th>Issuer</th>
+									<th>Issue Date</th>
+									<th>Expiry Date</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								{quals.map((qual) => (
+									<tr>
+										<td class="font-medium">{qual.data.title}</td>
+										<td>{qual.data.issuer}</td>
+										<td>{formatDate(qual.data.issueDate)}</td>
+										<td>{qual.data.expiryDate ? formatDate(qual.data.expiryDate) : '–'}</td>
+										<td>
+											<span class={`inline-block px-2 py-1 text-xs rounded ${
+												qual.data.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+											}`}>
+												{qual.data.isActive ? 'Active' : 'Expired'}
+											</span>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
 					</div>
-					<div class="cv-item">
-						<h3 class="cv-item-title">Advanced O2 Administration Certificate</h3>
-						<p class="cv-item-date">Expiry Date: 04/04/2027</p>
-					</div>
-					<div class="cv-item">
-						<h3 class="cv-item-title">Diving First Aid and First Aid at Work- Lvl3</h3>
-						<p class="cv-item-date">Expiry Date: 04/04/2027</p>
-					</div>
-				</div>
+				))}
 			</section>
 
-			<!-- Employment History Section -->
-			<section id="employment" class="cv-section">
-				<h2 class="cv-section-title">Employment History</h2>
-				<div class="space-y-6">
-					<!-- Sample employment - this will be dynamic -->
-					<div class="cv-item">
-						<h3 class="cv-item-title">DCN Diving – Abu Dhabi/AL Ruwais-U.A.E, Oil & Gas</h3>
-						<p class="cv-item-subtitle">Diving/Civils/Shipping</p>
-						<p class="cv-item-date">21st December 2022 until present</p>
-						<div class="cv-item-description">
-							<p><strong>Client:</strong> ADNOC Oils and Gas</p>
-							<p>Geo-Textile placing and stitching Rock Seabed Survey, Propeller Entanglement Removal, Moving operations of Jack up barge, removal of 82" manholes weighing 3,8tons. Arc welding, Wet welding cavi-blaster, 200bar water jetting, pneumatic grinder, pneumatic wrench, electric grinder, scaffolding assembly, crane operations, hydraulic pump, 40kg anode installation.</p>
+			<!-- Employment History -->
+			<section class="cv-section mb-8">
+				<h2 class="cv-h2">Employment History</h2>
+				
+				{sortedEmployment.map((job) => (
+					<div class="cv-entry">
+						<div class="cv-entry-header">
+							<div>
+								<div class="cv-entry-title">{job.data.position}</div>
+								<div class="cv-entry-company">{job.data.company}</div>
+								{job.data.client && (
+									<div class="text-sm text-cv-secondary">Client: {job.data.client}</div>
+								)}
+							</div>
+							<div class="cv-entry-dates">
+								{formatDateRange(job.data.startDate, job.data.endDate)}
+							</div>
 						</div>
+						<div class="cv-entry-location">{job.data.location}</div>
+						
+						{job.data.description && (
+							<div class="cv-entry-description">
+								{job.data.description}
+							</div>
+						)}
+						
+						{job.data.achievements && job.data.achievements.length > 0 && (
+							<div class="mt-3">
+								<h4 class="cv-h4">Key Achievements</h4>
+								<ul class="cv-list">
+									{job.data.achievements.map((achievement) => (
+										<li>{achievement}</li>
+									))}
+								</ul>
+							</div>
+						)}
+						
+						{job.data.skills && job.data.skills.length > 0 && (
+							<div class="mt-3">
+								<h4 class="cv-h4">Key Skills</h4>
+								<ul class="cv-list">
+									{job.data.skills.map((skill) => (
+										<li>{skill}</li>
+									))}
+								</ul>
+							</div>
+						)}
 					</div>
-				</div>
+				))}
 			</section>
 
-			<!-- Certificates Section -->
-			<section id="certificates" class="cv-section no-print">
-				<h2 class="cv-section-title">Certificates</h2>
-				<p class="text-cv-secondary mb-4">Certificate images and documentation</p>
-				<div class="certificate-grid">
-					<!-- Certificate items will be populated dynamically -->
-					<div class="certificate-item">
-						<h3 class="font-semibold">H2S Awareness</h3>
-						<p class="text-sm text-cv-secondary">Safety Certification</p>
+			<!-- Page Break -->
+			<div class="page-break-before"></div>
+
+			<!-- Certificates -->
+			<section class="cv-section mb-8">
+				<h2 class="cv-h2">{certificateSettings?.data.galleryTitle || 'Professional Certificates'}</h2>
+				
+				{certificateSettings?.data.displayCertificates && certificateImages.length > 0 && (
+					<div class="cv-certificates">
+						{certificateImages.map((cert) => (
+							<div class="cv-certificate">
+								<img 
+									src={cert.image} 
+									alt={`Certificate: ${cert.title}`}
+									loading="lazy"
+								/>
+								<div class="cv-certificate-title">{cert.title}</div>
+								{cert.description && (
+									<div class="text-xs text-cv-secondary mt-1">{cert.description}</div>
+								)}
+								<div class="text-xs text-cv-accent mt-1 uppercase">{cert.category}</div>
+							</div>
+						))}
 					</div>
-					<div class="certificate-item">
-						<h3 class="font-semibold">IMCA DMT</h3>
-						<p class="text-sm text-cv-secondary">Medical Certification</p>
-					</div>
-				</div>
+				)}
+				
 			</section>
 
-			<!-- Print Button -->
-			<div class="mt-8 text-center no-print">
-				<button onclick="window.print()" class="bg-cv-primary text-cv-background px-6 py-2 rounded hover:bg-cv-secondary transition-colors">
-					Print CV
-				</button>
-			</div>
-		</main>
+		</div>
+
+		<!-- Print Button (hidden in print) -->
+		<div class="no-print fixed bottom-4 right-4">
+			<button 
+				onclick="window.print()" 
+				class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow-lg transition-colors"
+			>
+				Print CV
+			</button>
+		</div>
+
 	</body>
 </html>

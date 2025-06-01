@@ -50,20 +50,6 @@ const employmentCollection = defineCollection({
   }),
 });
 
-const certificatesCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    image: z.string(),
-    category: z.enum(['Medical', 'Safety', 'Training', 'Identification', 'Commercial Diving', 'Other']),
-    issuer: z.string().optional(),
-    issueDate: z.string().optional(),
-    expiryDate: z.string().optional(),
-    description: z.string().optional(),
-    relatedQualification: z.string().optional(),
-  }),
-});
-
 const educationCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -76,10 +62,26 @@ const educationCollection = defineCollection({
   }),
 });
 
+const settingsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    displayCertificates: z.boolean().default(true),
+    galleryTitle: z.string().default('Professional Certificates'),
+    certificateImages: z.array(z.object({
+      image: z.string(),
+      title: z.string(),
+      description: z.string().optional(),
+      category: z.enum(['Safety', 'Medical', 'Professional', 'Diving', 'Marine', 'Identification', 'Other']).default('Professional'),
+      order: z.number().default(1),
+    })).default([]),
+  }),
+});
+
 export const collections = {
   personal: personalCollection,
   qualifications: qualificationsCollection,
   employment: employmentCollection,
-  certificates: certificatesCollection,
   education: educationCollection,
+  settings: settingsCollection,
 }; 
