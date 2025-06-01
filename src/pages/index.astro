@@ -1,0 +1,120 @@
+---
+// Import our CSS styles
+import '../styles/main.css';
+// Page imports and logic will go here
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Sean Vos - Curriculum Vitae</title>
+		<meta name="description" content="Professional CV of Sean Vos - Commercial Diver and Marine Professional" />
+	</head>
+	<body class="font-family-cv-sans bg-cv-background text-cv-primary">
+		<main class="max-w-4xl mx-auto p-8 print:p-0">
+			<!-- Header Section -->
+			<header class="text-center mb-8 cv-section">
+				<h1 class="text-4xl font-bold mb-2 text-cv-primary">Sean Sebastian Vos</h1>
+				<p class="text-cv-secondary text-lg">Commercial Diver & Marine Professional</p>
+				
+				<!-- Navigation - hidden when printing -->
+				<nav class="mt-6 no-print">
+					<div class="flex justify-center space-x-6 text-sm">
+						<a href="#personal" class="text-cv-secondary hover:text-cv-primary transition-colors">Personal</a>
+						<a href="#qualifications" class="text-cv-secondary hover:text-cv-primary transition-colors">Qualifications</a>
+						<a href="#employment" class="text-cv-secondary hover:text-cv-primary transition-colors">Employment</a>
+						<a href="#certificates" class="text-cv-secondary hover:text-cv-primary transition-colors">Certificates</a>
+						<a href="/admin" class="text-cv-accent hover:text-cv-primary transition-colors">Admin</a>
+					</div>
+				</nav>
+			</header>
+
+			<!-- Personal Particulars Section -->
+			<section id="personal" class="cv-section">
+				<h2 class="cv-section-title">Personal Particulars</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div>
+						<p><strong>Name:</strong> Sean Sebastian Vos</p>
+						<p><strong>Address:</strong> 17 High Street, Mount Moreland<br>KwaZulu Natal, South Africa 4339</p>
+						<p><strong>Email:</strong> vos.sean@gmail.com</p>
+						<p><strong>Contact:</strong> +27 680533072 Mobile</p>
+					</div>
+					<div>
+						<p><strong>Passport:</strong> A09400928</p>
+						<p><strong>Date of Birth:</strong> 12 December 1975</p>
+						<p><strong>Nationality:</strong> South African</p>
+						<p><strong>Sex:</strong> Male</p>
+						<p><strong>Marital Status:</strong> Single</p>
+						<p><strong>Dependants:</strong> One</p>
+						<p><strong>Languages:</strong> English/Afrikaans</p>
+						<p><strong>Health:</strong> Excellent</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Qualifications Section -->
+			<section id="qualifications" class="cv-section">
+				<h2 class="cv-section-title">Qualifications</h2>
+				<div class="space-y-4">
+					<!-- Sample qualification - this will be dynamic -->
+					<div class="cv-item">
+						<h3 class="cv-item-title">IMCA Diver Medic-DMT</h3>
+						<p class="cv-item-date">Expiry Date: 04/04/2026</p>
+					</div>
+					<div class="cv-item">
+						<h3 class="cv-item-title">Advanced O2 Administration Certificate</h3>
+						<p class="cv-item-date">Expiry Date: 04/04/2027</p>
+					</div>
+					<div class="cv-item">
+						<h3 class="cv-item-title">Diving First Aid and First Aid at Work- Lvl3</h3>
+						<p class="cv-item-date">Expiry Date: 04/04/2027</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Employment History Section -->
+			<section id="employment" class="cv-section">
+				<h2 class="cv-section-title">Employment History</h2>
+				<div class="space-y-6">
+					<!-- Sample employment - this will be dynamic -->
+					<div class="cv-item">
+						<h3 class="cv-item-title">DCN Diving – Abu Dhabi/AL Ruwais-U.A.E, Oil & Gas</h3>
+						<p class="cv-item-subtitle">Diving/Civils/Shipping</p>
+						<p class="cv-item-date">21st December 2022 until present</p>
+						<div class="cv-item-description">
+							<p><strong>Client:</strong> ADNOC Oils and Gas</p>
+							<p>Geo-Textile placing and stitching Rock Seabed Survey, Propeller Entanglement Removal, Moving operations of Jack up barge, removal of 82" manholes weighing 3,8tons. Arc welding, Wet welding cavi-blaster, 200bar water jetting, pneumatic grinder, pneumatic wrench, electric grinder, scaffolding assembly, crane operations, hydraulic pump, 40kg anode installation.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Certificates Section -->
+			<section id="certificates" class="cv-section no-print">
+				<h2 class="cv-section-title">Certificates</h2>
+				<p class="text-cv-secondary mb-4">Certificate images and documentation</p>
+				<div class="certificate-grid">
+					<!-- Certificate items will be populated dynamically -->
+					<div class="certificate-item">
+						<h3 class="font-semibold">H2S Awareness</h3>
+						<p class="text-sm text-cv-secondary">Safety Certification</p>
+					</div>
+					<div class="certificate-item">
+						<h3 class="font-semibold">IMCA DMT</h3>
+						<p class="text-sm text-cv-secondary">Medical Certification</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Print Button -->
+			<div class="mt-8 text-center no-print">
+				<button onclick="window.print()" class="bg-cv-primary text-cv-background px-6 py-2 rounded hover:bg-cv-secondary transition-colors">
+					Print CV
+				</button>
+			</div>
+		</main>
+	</body>
+</html>

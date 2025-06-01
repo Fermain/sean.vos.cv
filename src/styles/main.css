@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  /* CV-specific color palette */
+  --color-cv-primary: oklch(0.2 0 0); /* Dark text */
+  --color-cv-secondary: oklch(0.5 0 0); /* Medium gray */
+  --color-cv-accent: oklch(0.8 0 0); /* Light gray */
+  --color-cv-background: oklch(1 0 0); /* White */
+  --color-cv-border: oklch(0.9 0 0); /* Very light gray */
+  
+  /* Typography */
+  --font-family-cv-serif: "Times New Roman", serif;
+  --font-family-cv-sans: "Arial", sans-serif;
+  
+  /* Spacing scale for professional layouts */
+  --spacing: 0.25rem; /* Base spacing unit */
+  
+  /* Custom line heights for readability */
+  --line-height-cv-tight: 1.2;
+  --line-height-cv-normal: 1.5;
+  --line-height-cv-relaxed: 1.7;
+  
+  /* Print-specific breakpoints */
+  --breakpoint-print: 8.5in;
+  --breakpoint-a4: 210mm;
+}
+
+/* Print-specific styles */
+@media print {
+  :root {
+    --color-cv-primary: black;
+    --color-cv-secondary: #333;
+    --color-cv-accent: #666;
+    --color-cv-background: white;
+    --color-cv-border: #ddd;
+  }
+  
+  body {
+    font-size: 11pt;
+    line-height: var(--line-height-cv-normal);
+    color: var(--color-cv-primary);
+    background: var(--color-cv-background);
+  }
+  
+  /* Hide navigation and interactive elements when printing */
+  .no-print {
+    display: none !important;
+  }
+  
+  /* Ensure proper page breaks */
+  .page-break-before {
+    page-break-before: always;
+  }
+  
+  .page-break-after {
+    page-break-after: always;
+  }
+  
+  .page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
+  
+  /* Optimize tables for printing */
+  table {
+    page-break-inside: auto;
+  }
+  
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+}
+
+/* Professional CV styles */
+.cv-section {
+  margin-bottom: calc(var(--spacing) * 6);
+  page-break-inside: avoid;
+}
+
+.cv-section-title {
+  font-family: var(--font-family-cv-serif);
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--color-cv-primary);
+  border-bottom: 1px solid var(--color-cv-border);
+  padding-bottom: calc(var(--spacing) * 2);
+  margin-bottom: calc(var(--spacing) * 4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cv-item {
+  margin-bottom: calc(var(--spacing) * 4);
+  page-break-inside: avoid;
+}
+
+.cv-item-title {
+  font-weight: bold;
+  color: var(--color-cv-primary);
+}
+
+.cv-item-subtitle {
+  color: var(--color-cv-secondary);
+  font-style: italic;
+}
+
+.cv-item-date {
+  color: var(--color-cv-secondary);
+  font-size: 0.9rem;
+}
+
+.cv-item-description {
+  color: var(--color-cv-primary);
+  line-height: var(--line-height-cv-normal);
+  margin-top: calc(var(--spacing) * 2);
+}
+
+/* Certificate gallery styles */
+.certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: calc(var(--spacing) * 4);
+  margin-top: calc(var(--spacing) * 4);
+}
+
+.certificate-item {
+  border: 1px solid var(--color-cv-border);
+  border-radius: calc(var(--spacing) * 2);
+  padding: calc(var(--spacing) * 3);
+  background: var(--color-cv-background);
+  transition: box-shadow 0.2s ease;
+}
+
+.certificate-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media print {
+  .certificate-grid {
+    display: none;
+  }
+} 
