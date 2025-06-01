@@ -139,6 +139,36 @@ sean.vos.cv/
    - Images are stored in `public/uploads/`
    - Content is automatically committed to Git
 
+4. **Publish**: Changes are automatically saved and deployed
+
+### Local Development Workflow
+
+For developers working on the codebase:
+
+1. **Switch to Local Backend** (temporarily)
+   ```yaml
+   # In public/admin/config.yml, comment out GitHub and enable local:
+   # backend:
+   #   name: github
+   #   repo: your-username/your-repo-name
+   #   branch: main
+   
+   backend:
+     name: git-gateway
+     branch: main
+   local_backend: true
+   ```
+
+2. **Start Development Servers**
+   ```bash
+   pnpm dev              # Astro server (auto-assigned port)
+   npx decap-server      # CMS proxy server (port 8081)
+   ```
+
+3. **Access Local CMS**: `http://localhost:XXXX/admin` (no auth required)
+
+4. **Switch Back to Production** before committing changes
+
 ## 🎨 Styling & Design
 
 ### Design Principles
@@ -164,32 +194,71 @@ sean.vos.cv/
 
 ## 🚀 Deployment
 
-### Development Workflow
+### Authentication Setup
 
-1. **Local Development**
-   ```bash
-   pnpm dev              # Start Astro (port 7008)
-   npx decap-server      # Start CMS proxy (port 8081)
+The site is configured to use **GitHub OAuth** for content management access. This means:
+
+- ✅ **CMS Authentication**: Users log in with their GitHub account
+- ✅ **Repository Access**: Content editors need push access to the GitHub repository
+- ✅ **Simple Setup**: No additional authentication servers required
+
+### Production Deployment Steps
+
+1. **Update Repository Information**
+   ```yaml
+   # In public/admin/config.yml, update:
+   backend:
+     name: github
+     repo: your-username/your-repo-name  # Update this
+     branch: main
    ```
 
-2. **Content Updates**
-   - Use CMS admin interface for content changes
-   - Settings page prevents accidental deletion
-   - Content automatically saved to Git
-   - Preview changes locally before deployment
+2. **GitHub OAuth Application (if deploying to custom domain)**
+   - Only required for non-Netlify hosting
+   - For Netlify: OAuth is handled automatically
 
-3. **Production Build**
-   ```bash
-   pnpm build           # Generate static files
-   pnpm preview         # Preview production build
-   ```
+3. **Deploy to Platform**
+   - **Netlify**: Connect GitHub repo, auto-deploy on push
+   - **Vercel**: Connect GitHub repo, auto-deploy on push  
+   - **GitHub Pages**: Enable in repository settings
 
-### Deployment to GitHub Pages
+4. **Access Control**
+   - Content editors need **write access** to the GitHub repository
+   - CMS will be accessible at `https://your-domain.com/admin`
+   - Authentication is handled via GitHub login
 
-- [ ] Configure GitHub Actions workflow
-- [ ] Set up custom domain (sean.vos.cv.ferma.in)
-- [ ] Enable GitHub Pages
-- [ ] Configure Netlify Identity for production CMS
+### Content Management Access
+
+- **URL**: `https://your-site-url.com/admin`
+- **Authentication**: GitHub account with repository access
+- **Permissions**: Users need write/push access to the repository
+- **Local Development**: Run `pnpm dev` and use local backend mode
+
+### Quick Deploy Options
+
+**Option 1: Netlify (Recommended)**
+1. Connect GitHub repository to Netlify
+2. Deploy automatically on every push
+3. CMS authentication handled by Netlify + GitHub
+
+**Option 2: Vercel**
+1. Connect GitHub repository to Vercel  
+2. Deploy automatically on every push
+3. May need to configure OAuth app for custom domains
+
+**Option 3: GitHub Pages**
+1. Enable GitHub Pages in repository settings
+2. Use GitHub Actions for build and deploy
+3. Configure OAuth app for github.io domain
+
+## 📝 Content Management
+
+### For Content Editors (like Sean)
+
+1. **Access the CMS**: Go to `https://site-url.com/admin`
+2. **Login**: Use GitHub account (must have repository access)
+3. **Edit Content**: Use the visual editor to update CV information
+4. **Publish**: Changes are automatically saved and deployed
 
 ## 📊 Commands
 

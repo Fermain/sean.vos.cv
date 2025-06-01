@@ -1,0 +1,108 @@
+# Production backend - GitHub OAuth
+backend:
+  name: github
+  repo: Fermain/sean.vos.cv  # Update this with the actual GitHub repo
+  branch: main
+
+# Local development backend (commented out for production)
+# backend:
+#   name: git-gateway
+#   branch: main
+# local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  # Settings page - File-based collection for site configuration
+  - name: "settings"
+    label: "Site Settings"
+    delete: false  # Prevent accidental deletion of settings
+    editor:
+      preview: false  # Settings don't need preview
+    files:
+      - name: "personal"
+        label: "Personal Information"
+        file: "src/content/personal/details.md"
+        description: "Personal contact information and basic details for Sean's CV"
+        fields:
+          - { name: "name", label: "Full Name", widget: "string", hint: "Full legal name as it appears on official documents" }
+          - { name: "address", label: "Address", widget: "text", hint: "Complete postal address including postal code" }
+          - { name: "email", label: "Email", widget: "string", hint: "Primary contact email address" }
+          - { name: "phone", label: "Phone", widget: "string", hint: "Include country code and specify mobile/landline" }
+          - { name: "passport", label: "Passport Number", widget: "string" }
+          - { name: "dateOfBirth", label: "Date of Birth", widget: "date" }
+          - { name: "nationality", label: "Nationality", widget: "string" }
+          - { name: "sex", label: "Sex", widget: "select", options: ["Male", "Female"] }
+          - { name: "maritalStatus", label: "Marital Status", widget: "select", options: ["Single", "Married", "Divorced", "Widowed"] }
+          - { name: "dependants", label: "Dependants", widget: "string", hint: "Number and relationship of dependants" }
+          - { name: "languages", label: "Languages", widget: "string", hint: "Languages spoken and proficiency level" }
+          - { name: "health", label: "Health Status", widget: "string", hint: "General health condition for work purposes" }
+          - { name: "photo", label: "Profile Photo", widget: "image", required: false, hint: "Professional headshot for CV" }
+
+      - name: "certificates"
+        label: "Certificate Settings"
+        file: "src/content/settings/certificates.md"
+        description: "Manage certificate display settings and gallery"
+        fields:
+          - { name: "title", label: "Settings Title", widget: "string", default: "Certificate Settings" }
+          - { name: "displayCertificates", label: "Display Certificates", widget: "boolean", default: true }
+          - { name: "galleryTitle", label: "Certificate Gallery Title", widget: "string", default: "Professional Certificates" }
+          - { name: "certificateImages", label: "Certificate Images", widget: "list", 
+              fields: [
+                { name: "image", label: "Image File", widget: "image" },
+                { name: "title", label: "Title", widget: "string" },
+                { name: "description", label: "Description", widget: "text", required: false },
+                { name: "category", label: "Category", widget: "select", 
+                  options: ["Safety", "Medical", "Professional", "Diving", "Marine", "Identification", "Other"], 
+                  default: "Professional" },
+                { name: "order", label: "Display Order", widget: "number", default: 1 }
+              ]}
+
+  - name: "qualifications"
+    label: "Qualifications"
+    folder: "src/content/qualifications"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: "title", label: "Qualification Title", widget: "string" }
+      - { name: "issuer", label: "Issuing Organization", widget: "string" }
+      - { name: "issueDate", label: "Issue Date", widget: "date", required: false }
+      - { name: "expiryDate", label: "Expiry Date", widget: "date", required: false }
+      - { name: "description", label: "Description", widget: "text", required: false }
+      - { name: "certificateNumber", label: "Certificate Number", widget: "string", required: false }
+      - { name: "category", label: "Category", widget: "select", 
+          options: ["Medical", "Safety", "Commercial Diving", "Training", "Other"], 
+          default: "Other" }
+      - { name: "isActive", label: "Currently Active", widget: "boolean", default: true }
+
+  - name: "employment"
+    label: "Employment History"
+    folder: "src/content/employment"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - { name: "company", label: "Company Name", widget: "string" }
+      - { name: "position", label: "Position/Designation", widget: "string" }
+      - { name: "client", label: "Client", widget: "string", required: false }
+      - { name: "department", label: "Department", widget: "string", required: false }
+      - { name: "location", label: "Location", widget: "string" }
+      - { name: "startDate", label: "Start Date", widget: "date" }
+      - { name: "endDate", label: "End Date", widget: "date", required: false }
+      - { name: "current", label: "Current Position", widget: "boolean", default: false }
+      - { name: "description", label: "Job Description", widget: "markdown" }
+      - { name: "achievements", label: "Key Achievements", widget: "list", required: false }
+      - { name: "skills", label: "Skills Used", widget: "list", required: false }
+
+  - name: "education"
+    label: "Education"
+    folder: "src/content/education"
+    create: true
+    slug: "{{year}}-{{slug}}"
+    fields:
+      - { name: "institution", label: "Institution", widget: "string" }
+      - { name: "qualification", label: "Qualification", widget: "string" }
+      - { name: "level", label: "Level", widget: "string" }
+      - { name: "yearCompleted", label: "Year Completed", widget: "date" }
+      - { name: "location", label: "Location", widget: "string", required: false }
+      - { name: "description", label: "Description", widget: "text", required: false } 
