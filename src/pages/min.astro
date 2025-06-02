@@ -3,9 +3,8 @@
 import '../styles/main.css';
 import { getCollection, getEntry } from 'astro:content';
 
-// Get all content from collections
+// Get all content from collections (excluding certificates)
 const personalDetails = await getEntry('personal', 'details');
-const certificateSettings = await getEntry('settings', 'certificates');
 const qualifications = await getCollection('qualifications');
 const employment = await getCollection('employment');
 const education = await getCollection('education');
@@ -49,12 +48,6 @@ function formatDateRange(startDate: string, endDate?: string): string {
 	const end = endDate ? formatDate(endDate) : 'Present';
 	return `${start} – ${end}`;
 }
-
-// Get certificate images from settings, sorted by order
-const certificateImages = certificateSettings?.data.certificateImages
-	?.sort((a, b) => (a.order || 0) - (b.order || 0)) || [];
-
-// Page imports and logic will go here
 ---
 
 <html lang="en">
@@ -63,8 +56,8 @@ const certificateImages = certificateSettings?.data.certificateImages
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Sean Sebastian Vos - Professional CV</title>
-		<meta name="description" content="Professional CV of Sean Sebastian Vos - Commercial Diver and Marine Professional" />
+		<title>Sean Sebastian Vos - Professional CV (Minimal)</title>
+		<meta name="description" content="Minimal Professional CV of Sean Sebastian Vos - Commercial Diver and Marine Professional" />
 	</head>
 	<body class="font-family-cv-sans bg-cv-background text-cv-primary">
 		<div class="cv-document">
@@ -258,34 +251,6 @@ const certificateImages = certificateSettings?.data.certificateImages
 				))}
 			</section>
 
-			<!-- Page Break -->
-			<div class="page-break-before"></div>
-
-			<!-- Certificates -->
-			<section class="cv-section mb-8">
-				<h2 class="cv-h2">{certificateSettings?.data.galleryTitle || 'Professional Certificates'}</h2>
-				
-				{certificateSettings?.data.displayCertificates && certificateImages.length > 0 && (
-					<div class="cv-certificates">
-						{certificateImages.map((cert) => (
-							<div class="cv-certificate">
-								<img 
-									src={cert.image} 
-									alt={`Certificate: ${cert.title}`}
-									loading="lazy"
-								/>
-								<div class="cv-certificate-title">{cert.title}</div>
-								{cert.description && (
-									<div class="text-xs text-cv-secondary mt-1">{cert.description}</div>
-								)}
-								<div class="text-xs text-cv-accent mt-1 uppercase">{cert.category}</div>
-							</div>
-						))}
-					</div>
-				)}
-				
-			</section>
-
 		</div>
 
 		<!-- Print Button (hidden in print) -->
@@ -298,15 +263,15 @@ const certificateImages = certificateSettings?.data.certificateImages
 			</button>
 		</div>
 
-		<!-- Navigation Link to Minimal View (hidden in print) -->
+		<!-- Navigation Link (hidden in print) -->
 		<div class="no-print fixed bottom-4 left-4">
 			<a 
-				href="/min" 
-				class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow-lg transition-colors inline-block"
+				href="/" 
+				class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded shadow-lg transition-colors inline-block"
 			>
-				Minimal CV →
+				← Full CV
 			</a>
 		</div>
 
 	</body>
-</html>
+</html> 
