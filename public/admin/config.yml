@@ -31,7 +31,7 @@ collections:
           - { name: "email", label: "Email", widget: "string", hint: "Primary contact email address" }
           - { name: "phone", label: "Phone", widget: "string", hint: "Include country code and specify mobile/landline" }
           - { name: "passport", label: "Passport Number", widget: "string" }
-          - { name: "dateOfBirth", label: "Date of Birth", widget: "date" }
+          - { name: "dateOfBirth", label: "Date of Birth", widget: "string", hint: "Format: DD/MM/YYYY or 12 December 1975" }
           - { name: "nationality", label: "Nationality", widget: "string" }
           - { name: "sex", label: "Sex", widget: "select", options: ["Male", "Female"] }
           - { name: "maritalStatus", label: "Marital Status", widget: "select", options: ["Single", "Married", "Divorced", "Widowed"] }
@@ -67,8 +67,8 @@ collections:
     fields:
       - { name: "title", label: "Qualification Title", widget: "string" }
       - { name: "issuer", label: "Issuing Organization", widget: "string" }
-      - { name: "issueDate", label: "Issue Date", widget: "date", required: false }
-      - { name: "expiryDate", label: "Expiry Date", widget: "date", required: false }
+      - { name: "issueDate", label: "Issue Date", widget: "string", required: false, hint: "Format: DD/MM/YYYY" }
+      - { name: "expiryDate", label: "Expiry Date", widget: "string", required: false, hint: "Format: DD/MM/YYYY" }
       - { name: "description", label: "Description", widget: "text", required: false }
       - { name: "certificateNumber", label: "Certificate Number", widget: "string", required: false }
       - { name: "category", label: "Category", widget: "select", 
@@ -87,8 +87,8 @@ collections:
       - { name: "client", label: "Client", widget: "string", required: false }
       - { name: "department", label: "Department", widget: "string", required: false }
       - { name: "location", label: "Location", widget: "string" }
-      - { name: "startDate", label: "Start Date", widget: "date" }
-      - { name: "endDate", label: "End Date", widget: "date", required: false }
+      - { name: "startDate", label: "Start Date", widget: "string", hint: "Format: DD/MM/YYYY or December 2022" }
+      - { name: "endDate", label: "End Date", widget: "string", required: false, hint: "Format: DD/MM/YYYY or 'Present'" }
       - { name: "current", label: "Current Position", widget: "boolean", default: false }
       - { name: "description", label: "Job Description", widget: "markdown" }
       - { name: "achievements", label: "Key Achievements", widget: "list", required: false }
@@ -103,6 +103,6 @@ collections:
       - { name: "institution", label: "Institution", widget: "string" }
       - { name: "qualification", label: "Qualification", widget: "string" }
       - { name: "level", label: "Level", widget: "string" }
-      - { name: "yearCompleted", label: "Year Completed", widget: "date" }
+      - { name: "yearCompleted", label: "Year Completed", widget: "string", hint: "Format: YYYY or Year description" }
       - { name: "location", label: "Location", widget: "string", required: false }
       - { name: "description", label: "Description", widget: "text", required: false } 
