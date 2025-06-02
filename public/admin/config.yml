@@ -1,21 +1,15 @@
 # Production backend - GitHub OAuth
 backend:
-  name: github
-  repo: fermain/sean.vos.cv
+  name: git-gateway
+  repo: Fermain/sean.vos.cv
   branch: main
-  base_url: https://your-oauth-proxy.workers.dev  # You'll need to set up an OAuth proxy
+  identity_url: https://auth.decapbridge.com/sites/f82c6919-ef32-48c7-a251-9b1c412f1ff8
+  gateway_url: https://gateway.decapbridge.com
 
-# Local development backend (commented out for production)
-# backend:
-#   name: git-gateway
-#   branch: main
-# local_backend: true
 
-# Remove any Netlify-specific configuration
-# site_url: https://sean.vos.cv.ferma.in
-# display_url: https://sean.vos.cv.ferma.in
+site_url: http://sean.vos.cv.ferma.in
 
-publish_mode: editorial_workflow
+# publish_mode: editorial_workflow
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
