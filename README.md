@@ -196,105 +196,70 @@ For developers working on the codebase:
 
 ### Authentication Setup
 
-The site uses **GitHub PKCE Authentication** for secure, modern content management access:
+Since the site is deployed on **GitHub Pages** (not Netlify), you need an OAuth proxy for GitHub authentication:
 
-- ✅ **GitHub PKCE**: Secure authentication without requiring external services
-- ✅ **No OAuth App Required**: PKCE eliminates the need for server-side OAuth handling
-- ✅ **Direct GitHub Integration**: Users authenticate directly with GitHub
-- ✅ **Repository Access Control**: Content editors need push access to the GitHub repository
+- ❌ **GitHub PKCE**: Not supported by Decap CMS GitHub backend
+- ✅ **OAuth Proxy Service**: Required for GitHub Pages deployment
+- ✅ **Cloudflare Workers**: Free and reliable OAuth proxy option
+- ✅ **Git Gateway Alternative**: Use Netlify Identity (auth-only) with GitHub Pages
 
 ### Production Deployment Steps
 
-1. **Verify Repository Configuration**
+#### Option 1: Cloudflare Workers OAuth Proxy (Recommended)
+
+1. **Set up OAuth Proxy**
+   - Deploy Sveltia CMS Auth: https://github.com/sveltia/sveltia-cms-auth
+   - Configure Cloudflare Worker with your GitHub OAuth app
+   - Get your Worker URL (e.g., `https://sveltia-cms-auth.your-subdomain.workers.dev`)
+
+2. **Update CMS Configuration**
    ```yaml
    # In public/admin/config.yml:
    backend:
      name: github
-     repo: fermain/sean.vos.cv  # Verify this matches your repository
+     repo: fermain/sean.vos.cv
      branch: main
-     auth_type: pkce
+     base_url: https://your-oauth-proxy.workers.dev  # Your Worker URL
    ```
 
-2. **Deploy to GitHub Pages**
-   - Push changes to `main` branch
-   - GitHub Actions automatically builds and deploys
-   - No additional OAuth setup required
+3. **GitHub OAuth App Setup**
+   - Create GitHub OAuth app
+   - Set Authorization callback URL: `https://your-oauth-proxy.workers.dev/callback`
+   - Configure Worker with Client ID and Secret
 
-3. **Access Control**
-   - Content editors need **write access** to the GitHub repository
-   - CMS will be accessible at `https://sean.vos.cv.ferma.in/admin`
-   - Authentication handled via GitHub login with PKCE
+#### Option 2: Git Gateway with Netlify Identity
+
+1. **Netlify Setup (Auth only)**
+   ```yaml
+   # In public/admin/config.yml:
+   backend:
+     name: git-gateway
+     branch: main
+   ```
+
+2. **Configure Netlify Identity**
+   - Create free Netlify account
+   - Enable Identity and Git Gateway in dashboard
+   - Don't deploy to Netlify - keep GitHub Pages deployment
 
 ### Content Management Access
 
-- **URL**: `https://sean.vos.cv.ferma.in/admin`
-- **Authentication**: GitHub account with repository push access
-- **Login Flow**: Direct GitHub authentication (no external providers needed)
-- **Permissions**: Users need write/push access to the repository
+- **OAuth Proxy**: `https://sean.vos.cv.ferma.in/admin`
+- **Authentication**: GitHub OAuth via proxy service
+- **Permissions**: Users need write access to the repository
 - **Local Development**: Run `pnpm dev` and use local backend mode
 
 ### Quick Deploy Options
 
-**Option 1: Netlify (Recommended)**
-1. Connect GitHub repository to Netlify
-2. Deploy automatically on every push
-3. CMS authentication handled by Netlify + GitHub
+**Current Setup: GitHub Pages**
+- ✅ Automatic deployment via GitHub Actions
+- ❌ Requires OAuth proxy for CMS authentication
+- ✅ Custom domain support (sean.vos.cv.ferma.in)
 
-**Option 2: Vercel**
-1. Connect GitHub repository to Vercel  
-2. Deploy automatically on every push
-3. May need to configure OAuth app for custom domains
-
-**Option 3: GitHub Pages**
-1. Enable GitHub Pages in repository settings
-2. Use GitHub Actions for build and deploy
-3. Configure OAuth app for github.io domain
-
-#### GitHub Pages Setup (Detailed)
-
-**Repository Setup:**
-1. Go to repository **Settings** → **Pages**
-2. Under **Source**, select **GitHub Actions**
-3. The workflow will automatically deploy on every push to `main`
-
-**Custom Domain (Optional):**
-1. In **Settings** → **Pages** → **Custom domain**, enter your domain
-2. Update `astro.config.mjs`:
-   ```javascript
-   export default defineConfig({
-     site: 'https://your-custom-domain.com',
-     base: '/',
-     // ... other config
-   });
-   ```
-
-**GitHub Actions Workflow:**
-- ✅ **Official Astro Action** - Uses `withastro/action@v4` for streamlined deployment
-- ✅ **Automatic builds** on push to `main` branch
-- ✅ **Manual deployment** via Actions tab
-- ✅ **Built-in optimization** with Node.js 20 and pnpm support
-- ✅ **Simplified configuration** - handles setup, caching, and build automatically
-
-**Deployment URLs:**
-- **Production Site**: `https://sean.vos.cv.ferma.in`
-- **CMS Admin**: `https://sean.vos.cv.ferma.in/admin`
-- **GitHub Pages Fallback**: `https://fermain.github.io/sean.vos.cv` (if custom domain not configured)
-
-**Custom Domain Setup (sean.vos.cv.ferma.in):**
-1. **CNAME File**: Already included in `public/CNAME` (contains: `sean.vos.cv.ferma.in`)
-2. In **Settings** → **Pages** → **Custom domain**, enter: `sean.vos.cv.ferma.in`
-3. GitHub will detect the CNAME file automatically
-4. Ensure DNS records point to GitHub Pages:
-   ```
-   CNAME: sean.vos.cv.ferma.in → fermain.github.io
-   ```
-5. Enable **"Enforce HTTPS"** for security
-
-**First Deployment:**
-1. Push code to `main` branch
-2. GitHub Actions will automatically build and deploy
-3. Check **Actions** tab for build status
-4. Site will be available at: **https://sean.vos.cv.ferma.in**
+**Alternative: Move to Netlify**
+- ✅ Built-in authentication (no proxy needed)
+- ✅ Continuous deployment
+- ✅ Forms and serverless functions
 
 ## 📝 Content Management
 

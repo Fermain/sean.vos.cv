@@ -1,9 +1,9 @@
 # Production backend - GitHub OAuth
 backend:
   name: github
-  repo: fermain/sean.vos.cv  # Update if repository name is different
+  repo: fermain/sean.vos.cv
   branch: main
-  auth_type: pkce
+  base_url: https://your-oauth-proxy.workers.dev  # You'll need to set up an OAuth proxy
 
 # Local development backend (commented out for production)
 # backend:
