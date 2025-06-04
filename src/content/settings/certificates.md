@@ -3,7 +3,7 @@ title: Certificate Settings
 displayCertificates: true
 galleryTitle: Professional Certificates
 certificateImages:
-  - image: /uploads/SV H2s Awareness.png
+  - image: /uploads/06102b9b-7182-4401-a644-9f476a6dd2d3.jpeg
     title: H2S Awareness Certificate
     description: OPITO H2S Awareness certification for offshore operations
     category: Safety
