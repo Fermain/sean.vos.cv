@@ -57,6 +57,22 @@ certificateImages:
     order: 1
     image: /uploads/whatsapp-image-2025-06-01-at-11.12.36.jpeg
     title: AWS D3.6M-17 Class B
+  - category: Medical
+    order: 100
+    image: /uploads/Fitness Certificate.jpeg
+    title: Diver Class II Fitness Certificate
+  - category: Medical
+    order: 101
+    image: /uploads/Yellow Fever.jpeg
+    title: Yellow Fever Certificate
+  - category: Medical
+    order: 102
+    image: /uploads/Health.jpeg
+    title: Health Certificate
+  - category: Professional
+    order: 102
+    image: /uploads/Appreciation.jpeg
+    title: Certificate of Appreciation
 ---
 
 Certificate display settings and gallery configuration for Sean's professional CV. 
