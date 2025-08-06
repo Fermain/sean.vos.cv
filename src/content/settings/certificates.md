@@ -28,7 +28,7 @@ certificateImages:
     description: Advanced Oxygen Administration Certificate
     category: Medical
     order: 6
-  - image: /uploads/1000056804.png
+  - image: Dive Medical
     title: Diving Medical Certificate
     description: Commercial diving medical fitness certificate
     category: Medical
@@ -50,7 +50,7 @@ certificateImages:
     order: 10
   - category: Professional
     order: 1
-    image: /uploads/whatsapp-image-2025-06-01-at-11.12.36.jpeg
+    image: AWS Welding Cert
     title: AWS D3.6M-17 Class B
   - category: Medical
     order: 100
