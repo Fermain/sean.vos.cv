@@ -28,7 +28,7 @@ certificateImages:
     description: Advanced Oxygen Administration Certificate
     category: Medical
     order: 6
-  - image: Dive Medical
+  - image: /uploads/1000056804.png
     title: Diving Medical Certificate
     description: Commercial diving medical fitness certificate
     category: Medical
