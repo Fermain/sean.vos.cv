@@ -1,12 +1,13 @@
 ---
-company: Mermaid – Saudi Arabia
+company: Mermaid – Saudi Arabia/Poseidon
 position: Diving/Civils
 client: ARAMCO
 department: ""
 location: Poseidon
-startDate: "2025-03-01"
-endDate: "2025-04-15"
+startDate: 2025-03-01
+endDate: 2025-04-15
 current: true
-description: >-
-  CP Readings, HPWJ, Go pro bracelet, annode survey, bouy installation, UT & CP Inspection, inspection on risers, videography, grit blasting, scouring survey
+description: CP Readings, HPWJ, Go pro bracelet, annode survey, bouy
+  installation, UT & CP Inspection, inspection on risers, videography, grit
+  blasting, scouring survey
 ---
