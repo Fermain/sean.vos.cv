@@ -1,7 +1,7 @@
 ---
 title: Skippers Class C
 issuer: SAMSA
-issueDate: 14/08/2025
+issueDate: "2025-08-14"
 certificateNumber: "23152"
 category: Other
 isActive: true
