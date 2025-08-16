@@ -3,7 +3,7 @@ title: Certificate Settings
 displayCertificates: true
 galleryTitle: Professional Certificates
 certificateImages:
-  - image: H2s
+  - image: /uploads/06102b9b-7182-4401-a644-9f476a6dd2d3.jpeg
     title: H2S Awareness Certificate
     description: OPITO H2S Awareness certification for offshore operations
     category: Safety
@@ -28,7 +28,7 @@ certificateImages:
     description: Advanced Oxygen Administration Certificate
     category: Medical
     order: 6
-  - image: Dive Medical
+  - image: /uploads/1000055780.png
     title: Diving Medical Certificate
     description: Commercial diving medical fitness certificate
     category: Medical
@@ -50,12 +50,12 @@ certificateImages:
     order: 10
   - category: Professional
     order: 1
-    image: AWS Welding Cert
+    image: /uploads/whatsapp-image-2025-06-01-at-11.12.36.jpeg
     title: AWS D3.6M-17 Class B
-  - category: Medical
+  - category: Marine
     order: 100
-    image: /uploads/Fitness Certificate.jpeg
-    title: Diver Class II Fitness Certificate
+    image: /uploads/1000058694.png
+    title: Skippers Class C
   - category: Medical
     order: 101
     image: /uploads/Yellow Fever.jpeg
@@ -64,6 +64,9 @@ certificateImages:
     order: 102
     image: /uploads/Health.jpeg
     title: Health Certificate
+    description: |-
+      Covid 19 
+      2 Vaccine's 
   - category: Professional
     order: 102
     image: /uploads/Appreciation.jpeg
@@ -73,6 +76,10 @@ certificateImages:
     description: IMCA certified Diver Medic Technician qualification
     category: Medical
     order: 2
+  - category: Professional
+    order: 1
+    image: /uploads/SV Class II Dive Ticket.png
+    title: Class 2 Diving Certificate
 ---
 
 Certificate display settings and gallery configuration for Sean's professional CV. 
