@@ -1,5 +1,44 @@
 import { defineCollection, z } from 'astro:content';
 
+/**
+ * Parse dates in multiple formats to handle both DD/MM/YYYY and YYYY-MM-DD
+ * This ensures backward compatibility while migrating to the new format
+ */
+function parseDate(dateValue: string | Date | undefined | null): Date | undefined {
+  if (!dateValue) return undefined;
+  
+  // Already a Date object
+  if (dateValue instanceof Date) {
+    return isNaN(dateValue.getTime()) ? undefined : dateValue;
+  }
+  
+  // Handle string dates
+  const dateStr = String(dateValue).trim();
+  if (!dateStr || dateStr === '') return undefined;
+  
+  // Try DD/MM/YYYY format first (UK/European format)
+  const ddmmyyyyPattern = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+  const ddmmyyyyMatch = dateStr.match(ddmmyyyyPattern);
+  if (ddmmyyyyMatch) {
+    const [, day, month, year] = ddmmyyyyMatch;
+    const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    return isNaN(date.getTime()) ? undefined : date;
+  }
+  
+  // Try YYYY-MM-DD format (ISO format)
+  const isoPattern = /^(\d{4})-(\d{2})-(\d{2})$/;
+  const isoMatch = dateStr.match(isoPattern);
+  if (isoMatch) {
+    const [, year, month, day] = isoMatch;
+    const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    return isNaN(date.getTime()) ? undefined : date;
+  }
+  
+  // Fallback to native Date parsing (last resort)
+  const date = new Date(dateStr);
+  return isNaN(date.getTime()) ? undefined : date;
+}
+
 const personalCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -8,7 +47,7 @@ const personalCollection = defineCollection({
     email: z.string().email(),
     phone: z.string(),
     passport: z.string(),
-    dateOfBirth: z.coerce.date(),
+    dateOfBirth: z.preprocess((val) => parseDate(val as string | Date), z.date().optional()),
     nationality: z.string(),
     sex: z.enum(['Male', 'Female']),
     maritalStatus: z.enum(['Single', 'Married', 'Divorced', 'Widowed']),
@@ -24,8 +63,8 @@ const qualificationsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     issuer: z.string(),
-    issueDate: z.preprocess((val) => val === "" ? undefined : val, z.coerce.date().optional()),
-    expiryDate: z.preprocess((val) => val === "" ? undefined : val, z.coerce.date().optional()),
+    issueDate: z.preprocess((val) => parseDate(val as string | Date), z.date().optional()),
+    expiryDate: z.preprocess((val) => parseDate(val as string | Date), z.date().optional()),
     description: z.string().optional(),
     certificateNumber: z.string().optional(),
     category: z.enum(['Medical', 'Safety', 'Commercial Diving', 'Training', 'Other']),
@@ -41,8 +80,8 @@ const employmentCollection = defineCollection({
     client: z.string().optional(),
     department: z.string().optional(),
     location: z.string(),
-    startDate: z.coerce.date(),
-    endDate: z.preprocess((val) => val === "" ? undefined : val, z.coerce.date().optional()),
+    startDate: z.preprocess((val) => parseDate(val as string | Date), z.date().optional()),
+    endDate: z.preprocess((val) => parseDate(val as string | Date), z.date().optional()),
     current: z.boolean().default(false),
     description: z.string(),
     achievements: z.array(z.string()).optional(),
@@ -56,7 +95,7 @@ const educationCollection = defineCollection({
     institution: z.string(),
     qualification: z.string(),
     level: z.string(),
-    yearCompleted: z.coerce.date(),
+    yearCompleted: z.preprocess((val) => parseDate(val as string | Date), z.date().optional()),
     location: z.string().optional(),
     description: z.string().optional(),
   }),
