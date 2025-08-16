@@ -4,8 +4,7 @@ position: Air Diver/DMT
 client: Aramco
 department: "Bourbon Enterprise "
 location: "Saudi Arabia "
-startDate: 02/07/2025
-endDate: Till Present
+startDate: "2025-07-02"
 current: true
 description: |-
   HPWJ Marine Growth Cleaning

@@ -3,7 +3,7 @@ company: Mermaid
 position: Airdiver/DMT
 client: Armco
 location: "Saudi Arabia "
-startDate: 02/07/2025
+startDate: "2025-07-02"
 current: true
 description: HPWJ,
 ---
