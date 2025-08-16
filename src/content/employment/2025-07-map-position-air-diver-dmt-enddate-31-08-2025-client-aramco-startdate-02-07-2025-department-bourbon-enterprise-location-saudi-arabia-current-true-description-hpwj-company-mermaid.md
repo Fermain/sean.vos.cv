@@ -1,5 +1,5 @@
 ---
-company: "Mermaid "
+company: "Mermaid-Saudi Arabia/Bourbon Enterprise "
 position: Air Diver/DMT
 client: Aramco
 department: "Bourbon Enterprise "
