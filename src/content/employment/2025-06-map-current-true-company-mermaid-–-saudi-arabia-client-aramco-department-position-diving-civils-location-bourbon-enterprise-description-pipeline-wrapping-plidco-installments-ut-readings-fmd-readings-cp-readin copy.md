@@ -1,5 +1,5 @@
 ---
-company: Mermaid – Saudi Arabia - Swordfish
+company: Mermaid – Saudi Arabia - Paraiso
 position: Diving/Civils
 client: ARAMCO
 department: ""
