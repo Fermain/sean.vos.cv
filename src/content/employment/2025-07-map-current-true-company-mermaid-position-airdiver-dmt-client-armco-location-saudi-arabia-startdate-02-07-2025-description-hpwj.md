@@ -1,5 +1,5 @@
 ---
-company: Mermaid
+company: Mermaid- Saudi Arabia -Poseidon
 position: Airdiver/DMT
 client: Armco
 location: Saudi Arabia- Poseidon
