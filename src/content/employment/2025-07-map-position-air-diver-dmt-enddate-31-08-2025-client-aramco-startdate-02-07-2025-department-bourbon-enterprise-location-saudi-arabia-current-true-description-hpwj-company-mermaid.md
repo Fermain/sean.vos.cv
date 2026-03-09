@@ -1,10 +1,10 @@
 ---
 company: "Mermaid-Saudi Arabia/Bourbon Enterprise "
-position: Air Diver/DMT
+position: Air Diver/Wet Welder/Skipper.
 client: Aramco
 department: "Bourbon Enterprise "
 location: "Saudi Arabia "
-startDate: "2025-07-02"
+startDate: 2025-07-02
 current: true
 description: |-
   HPWJ Marine Growth Cleaning
