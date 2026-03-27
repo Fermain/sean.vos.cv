@@ -257,6 +257,7 @@
   font-size: 0.9rem;
   line-height: 1.3;
   color: var(--color-cv-primary);
+  white-space: pre-line;
 }
 
 /* Skills and achievements lists */

@@ -125,3 +125,4 @@ Thumbs.db
 
 # Astro specific
 .astro/ 
+.DS_Store

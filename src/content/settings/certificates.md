@@ -80,6 +80,13 @@ certificateImages:
     order: 16
     image: /uploads/Diving Permit.jpeg
     title: Class 2 Diving Permit
+  - category: Marine
+    order: 17
+    image: /uploads/samsa-day-skipper-certificate.jpeg
+    title: SAMSA Certificate of Competency — Day Skipper
+    description: >-
+      South African Maritime Safety Authority; Category C under 9m, day skipper power-driven
+      vessel to 15 NM; diving-operations skipper endorsement. SVC-0103978-S, issued 2 Feb 2026.
 ---
 
 Certificate display settings and gallery configuration for Sean's professional CV. 

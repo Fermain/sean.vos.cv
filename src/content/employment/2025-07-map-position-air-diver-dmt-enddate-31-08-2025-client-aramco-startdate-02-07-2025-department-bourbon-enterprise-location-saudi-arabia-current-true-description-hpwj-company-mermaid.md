@@ -7,21 +7,13 @@ location: "Saudi Arabia "
 startDate: 2025-07-02
 current: true
 description: |-
-  HPWJ Marine Growth Cleaning
-
-  Plidco
-
-  Grit Blasting
-
-  Cp Readings 
-
-  UT Readings
-
-  FMD Readings
-
-  Skippering Zodiac
-
-  Pipeline Surveying
-
-  Anode Surveying
+  1. HPWJ Marine Growth Cleaning
+  2. Plidco
+  3. Grit Blasting
+  4. Cp Readings
+  5. UT Readings
+  6. FMD Readings
+  7. Skippering Zodiac
+  8. Pipeline Surveying
+  9. Anode Surveying
 ---

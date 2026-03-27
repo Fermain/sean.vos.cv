@@ -133,6 +133,9 @@ sean.vos.cv/
    - **Certificates**: Images of official certificates and documents
    - **Education**: Academic qualifications and training
 
+   The certificate gallery renders **images only** (not PDF). If Sean supplies a scan as PDF, rasterise the first page before adding it to `public/uploads/`, for example:  
+   `magick "scan.pdf[0]" -density 200 -colorspace sRGB -quality 90 public/uploads/descriptive-name.jpeg`
+
 3. **Content Structure**
    - Settings are stored as a single markdown file with YAML frontmatter
    - Other content is stored as individual markdown files per entry
