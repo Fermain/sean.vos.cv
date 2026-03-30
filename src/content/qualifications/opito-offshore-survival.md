@@ -1,8 +1,8 @@
 ---
 title: "OPITO Offshore Survival"
 issuer: "OPITO (Offshore Petroleum Industry Training Organisation)"
-issueDate: "2022-01-25"
-expiryDate: "2026-01-25"
+issueDate: "2025-11-07"
+expiryDate: "2029-11-06"
 description: "Offshore survival training for personnel working in offshore petroleum industry"
 certificateNumber: ""
 category: "Safety"

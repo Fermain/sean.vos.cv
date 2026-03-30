@@ -15,7 +15,8 @@ certificateImages:
     order: 2
   - image: /uploads/offshore-survival-new.jpg
     title: Offshore Survival Training
-    description: BOSIET including Emergency Breathing System
+    description: >-
+      BOSIET including Emergency Breathing System. Valid 7 Nov 2025 – 6 Nov 2029.
     category: Safety
     order: 3
   - image: /uploads/Lvl 3 First Aid.jpeg
