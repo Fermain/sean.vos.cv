@@ -3,7 +3,7 @@ title: Certificate Settings
 displayCertificates: true
 galleryTitle: Professional Certificates
 certificateImages:
-  - image: /uploads/06102b9b-7182-4401-a644-9f476a6dd2d3.jpeg
+  - image: /uploads/h2s.jpg
     title: H2S Awareness Certificate
     description: OPITO H2S Awareness certification for offshore operations
     category: Safety
@@ -13,7 +13,7 @@ certificateImages:
     description: Commercial diving qualification for air diving operations
     category: Diving
     order: 2
-  - image: /uploads/SV Offhore Survival.png
+  - image: /uploads/offshore-survival-new.jpg
     title: Offshore Survival Training
     description: BOSIET including Emergency Breathing System
     category: Safety
@@ -28,7 +28,7 @@ certificateImages:
     description: Advanced Oxygen Administration Certificate
     category: Medical
     order: 5
-  - image: /uploads/1000055780.png
+  - image: /uploads/dive-medical.jpg
     title: Diving Medical Certificate
     description: Commercial diving medical fitness certificate
     category: Medical
@@ -52,36 +52,32 @@ certificateImages:
     order: 10
     image: /uploads/whatsapp-image-2025-06-01-at-11.12.36.jpeg
     title: AWS D3.6M-17 Class B
-  - category: Marine
-    order: 11
-    image: /uploads/1000058694.png
-    title: Skippers Class C
   - category: Medical
-    order: 12
-    image: /uploads/Yellow Fever.jpeg
+    order: 11
+    image: /uploads/SV Yellow Fever.png
     title: Yellow Fever Certificate
   - category: Medical
-    order: 13
+    order: 12
     image: /uploads/Health.jpeg
     title: Health Certificate
     description: |-
       Covid 19 
       2 Vaccine's 
   - category: Professional
-    order: 14
+    order: 13
     image: /uploads/Appreciation.jpeg
     title: Certificate of Appreciation
   - image: /uploads/IMCA DMT.jpeg
     title: IMCA Diver Medic Training
     description: IMCA certified Diver Medic Technician qualification
     category: Medical
-    order: 15
+    order: 14
   - category: Professional
-    order: 16
+    order: 15
     image: /uploads/Diving Permit.jpeg
     title: Class 2 Diving Permit
   - category: Marine
-    order: 17
+    order: 16
     image: /uploads/samsa-day-skipper-certificate.jpeg
     title: SAMSA Certificate of Competency — Day Skipper
     description: >-

@@ -4,7 +4,7 @@ issuer: OPITO (Offshore Petroleum Industry Training Organisation)
 issueDate: 2025-08-21
 expiryDate: 2028-08-21
 description: Hydrogen Sulfide awareness and safety training for offshore operations
-certificateNumber: 6404-45120594"
+certificateNumber: "6404-45120594"
 category: Safety
 isActive: true
 ---
