@@ -1,5 +1,5 @@
 ---
-company: Mermaid – Saudi Arabia - Zamil 66
+company: Mermaid – Saudi Arabia/Zamil 66
 position: Air Diver
 client: "Aramco "
 location: "SFNY "
