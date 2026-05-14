@@ -5,6 +5,7 @@ client: Aramco
 department: "Bourbon Enterprise "
 location: "Saudi Arabia "
 startDate: 2025-07-02
+endDate: 2026-02-03
 current: true
 description: HPWJ Marine Growth Cleaning, Plidco installation,  Grit Blasting,
   Cp Readings, UT Readings, FMD Readings, Skippering Zodiac, Pipeline Surveying,
