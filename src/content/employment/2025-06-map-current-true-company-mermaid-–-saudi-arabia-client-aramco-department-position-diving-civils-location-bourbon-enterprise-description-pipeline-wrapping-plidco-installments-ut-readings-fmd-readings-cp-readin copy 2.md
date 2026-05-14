@@ -1,6 +1,6 @@
 ---
 company: Mermaid – Saudi Arabia/Poseidon
-position: Diving/Civils
+position: Diving/Civils/Inspection
 client: ARAMCO
 department: ""
 location: Poseidon
