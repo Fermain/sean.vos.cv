@@ -7,7 +7,7 @@ backend:
   gateway_url: https://gateway.decapbridge.com
 
 
-site_url: http://sean.vos.cv.ferma.in
+site_url: https://sean.vos.cv.ferma.in
 
 # publish_mode: editorial_workflow
 media_folder: "public/uploads"
