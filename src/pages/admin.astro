@@ -9,23 +9,15 @@
   <meta name="robots" content="noindex" />
   <title>Sean Vos CV - Content Manager</title>
   <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
-  <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Include the script that builds the page and powers Decap CMS -->
-  <!-- Pinned: 3.15.0 regressed with React error #130 (decaporg/decap-cms#7900) -->
-  <script is:inline src="https://unpkg.com/decap-cms@3.14.1/dist/decap-cms.js"></script>
-  
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin";
-          });
-        }
-      });
-    }
-  </script>
+  <!--
+    Served from our own origin, copied out of node_modules by scripts/copy-cms.mjs.
+    The version lives in package.json so upgrades go through CI, not a CDN redirect.
+
+    Auth is DecapBridge (identity_url / gateway_url in config.yml), which the
+    git-gateway backend calls directly - no netlify-identity-widget needed.
+  -->
+  <script is:inline src="/admin/decap-cms.js"></script>
 </body>
 </html> 

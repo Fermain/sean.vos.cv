@@ -2,6 +2,9 @@
 dist/
 .output/
 
+# Decap CMS bundle, copied from node_modules by scripts/copy-cms.mjs
+public/admin/decap-cms.js
+
 # Generated types
 .astro/
 

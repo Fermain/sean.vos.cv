@@ -3,15 +3,17 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "node scripts/copy-cms.mjs && astro dev",
+    "build": "node scripts/copy-cms.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.8",
     "astro": "^5.8.1",
-    "decap-cms-app": "^3.6.3",
     "tailwindcss": "^4.1.8"
+  },
+  "devDependencies": {
+    "decap-cms": "3.14.1"
   }
 }
