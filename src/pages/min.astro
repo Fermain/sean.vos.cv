@@ -3,6 +3,7 @@
 import '../styles/main.css';
 import { getCollection, getEntry } from 'astro:content';
 import { isUnexpired } from '../lib/expiry';
+import UpdatedStamp from '../components/UpdatedStamp.astro';
 
 // Get all content from collections (excluding certificates)
 const personalDetails = await getEntry('personal', 'details');
@@ -64,6 +65,7 @@ function formatDateRange(startDate: string, endDate?: string): string {
 	</head>
 	<body class="font-family-cv-sans bg-cv-background text-cv-primary">
 		<div class="cv-document">
+			<UpdatedStamp />
 			
 			<!-- Header Section -->
 			<header class="mb-8">

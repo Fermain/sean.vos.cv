@@ -3,7 +3,7 @@
 import '../styles/main.css';
 import { getCollection, getEntry } from 'astro:content';
 import { isUnexpired } from '../lib/expiry';
-
+import UpdatedStamp from '../components/UpdatedStamp.astro';
 // Get all content from collections
 const personalDetails = await getEntry('personal', 'details');
 const certificateSettings = await getEntry('settings', 'certificates');
@@ -72,6 +72,7 @@ const certificateImages = (certificateSettings?.data.certificateImages || [])
 	</head>
 	<body class="font-family-cv-sans bg-cv-background text-cv-primary">
 		<div class="cv-document">
+			<UpdatedStamp />
 			
 			<!-- Header Section -->
 			<header class="mb-8">

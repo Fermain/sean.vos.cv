@@ -3,6 +3,7 @@
 import '../styles/main.css';
 import { getEntry } from 'astro:content';
 import { isUnexpired } from '../lib/expiry';
+import UpdatedStamp from '../components/UpdatedStamp.astro';
 
 // Get personal details and certificate settings
 const personalDetails = await getEntry('personal', 'details');
@@ -25,6 +26,7 @@ const certificateImages = (certificateSettings?.data.certificateImages || [])
 	</head>
 	<body class="font-family-cv-sans bg-cv-background text-cv-primary">
 		<div class="cv-document">
+			<UpdatedStamp />
 			
 			<!-- Header Section -->
 			<header class="mb-8">

@@ -75,6 +75,7 @@
 
 /* Typography styles */
 .cv-document {
+  position: relative;
   font-family: var(--font-family-cv-sans);
   color: var(--color-cv-primary);
   line-height: var(--line-height-cv-normal);
