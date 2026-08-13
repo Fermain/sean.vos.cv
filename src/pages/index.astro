@@ -2,6 +2,7 @@
 // Import our CSS styles
 import '../styles/main.css';
 import { getCollection, getEntry } from 'astro:content';
+import { isUnexpired } from '../lib/expiry';
 
 // Get all content from collections
 const personalDetails = await getEntry('personal', 'details');
@@ -17,13 +18,15 @@ const sortedEmployment = employment.sort((a, b) => {
 	return dateB.getTime() - dateA.getTime();
 });
 
-// Sort qualifications by issue date (most recent first)
-const sortedQualifications = qualifications.sort((a, b) => {
-	if (!a.data.issueDate || !b.data.issueDate) return 0;
-	const dateA = new Date(a.data.issueDate);
-	const dateB = new Date(b.data.issueDate);
-	return dateB.getTime() - dateA.getTime();
-});
+// Active + unexpired qualifications, most recent issue date first
+const sortedQualifications = qualifications
+	.filter((qual) => qual.data.isActive !== false && isUnexpired(qual.data.expiryDate))
+	.sort((a, b) => {
+		if (!a.data.issueDate || !b.data.issueDate) return 0;
+		const dateA = new Date(a.data.issueDate);
+		const dateB = new Date(b.data.issueDate);
+		return dateB.getTime() - dateA.getTime();
+	});
 
 // Group qualifications by category
 const qualificationsByCategory = sortedQualifications.reduce((acc, qual) => {
@@ -50,9 +53,10 @@ function formatDateRange(startDate: string, endDate?: string): string {
 	return `${start} – ${end}`;
 }
 
-// Get certificate images from settings, sorted by order
-const certificateImages = certificateSettings?.data.certificateImages
-	?.sort((a, b) => (a.order || 0) - (b.order || 0)) || [];
+// Unexpired certificate images from settings, sorted by order
+const certificateImages = (certificateSettings?.data.certificateImages || [])
+	.filter((cert) => isUnexpired(cert.expiryDate))
+	.sort((a, b) => (a.order || 0) - (b.order || 0));
 
 // Page imports and logic will go here
 ---

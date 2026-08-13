@@ -2,14 +2,16 @@
 // Import our CSS styles
 import '../styles/main.css';
 import { getEntry } from 'astro:content';
+import { isUnexpired } from '../lib/expiry';
 
 // Get personal details and certificate settings
 const personalDetails = await getEntry('personal', 'details');
 const certificateSettings = await getEntry('settings', 'certificates');
 
-// Get certificate images from settings, sorted by order
-const certificateImages = certificateSettings?.data.certificateImages
-	?.sort((a, b) => (a.order || 0) - (b.order || 0)) || [];
+// Unexpired certificate images from settings, sorted by order
+const certificateImages = (certificateSettings?.data.certificateImages || [])
+	.filter((cert) => isUnexpired(cert.expiryDate))
+	.sort((a, b) => (a.order || 0) - (b.order || 0));
 ---
 
 <html lang="en">

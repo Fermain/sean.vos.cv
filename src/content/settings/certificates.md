@@ -8,6 +8,7 @@ certificateImages:
     description: OPITO H2S Awareness certification for offshore operations
     category: Safety
     order: 1
+    expiryDate: 2028-08-21
   - image: /uploads/SV Class II Dive Ticket.png
     title: IMCA Class II Air Diver
     description: Commercial diving qualification for air diving operations
@@ -19,16 +20,19 @@ certificateImages:
       BOSIET including Emergency Breathing System. Valid 7 Nov 2025 – 6 Nov 2029.
     category: Safety
     order: 3
+    expiryDate: 2029-11-06
   - image: /uploads/Lvl 3 First Aid.jpeg
     title: Level 3 First Aid
     description: Diving First Aid and First Aid at Work Level 3
     category: Medical
     order: 4
+    expiryDate: 2027-04-04
   - image: /uploads/Oxygen Provider.jpeg
     title: Advanced O2 Administration
     description: Advanced Oxygen Administration Certificate
     category: Medical
     order: 5
+    expiryDate: 2027-04-04
   - image: /uploads/dive-medical.jpg
     title: Diving Medical Certificate
     description: Commercial diving medical fitness certificate
@@ -53,6 +57,7 @@ certificateImages:
     order: 10
     image: /uploads/whatsapp-image-2025-06-01-at-11.12.36.jpeg
     title: AWS D3.6M-17 Class B
+    expiryDate: 2027-04-25
   - category: Medical
     order: 11
     image: /uploads/SV Yellow Fever.png

@@ -113,6 +113,7 @@ const settingsCollection = defineCollection({
       description: z.string().optional(),
       category: z.enum(['Safety', 'Medical', 'Professional', 'Diving', 'Marine', 'Identification', 'Other']).default('Professional'),
       order: z.number().default(1),
+      expiryDate: z.preprocess((val) => parseDate(val as string | Date), z.date().optional()),
     })).default([]),
   }),
 });

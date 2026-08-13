@@ -1,4 +1,4 @@
-# Production backend - GitHub OAuth
+﻿# Production backend - GitHub OAuth
 backend:
   name: git-gateway
   repo: Fermain/sean.vos.cv
@@ -56,7 +56,8 @@ collections:
                 { name: "category", label: "Category", widget: "select", 
                   options: ["Safety", "Medical", "Professional", "Diving", "Marine", "Identification", "Other"], 
                   default: "Professional" },
-                { name: "order", label: "Display Order", widget: "number", default: 1 }
+                { name: "order", label: "Display Order", widget: "number", default: 1 },
+                { name: "expiryDate", label: "Expiry Date", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD", required: false, hint: "Leave blank for no expiry. Expired certificates are hidden on the site but kept in the CMS so you can stack renewals." }
               ]}
 
   - name: "qualifications"
