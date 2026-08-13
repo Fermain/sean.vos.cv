@@ -253,11 +253,13 @@ function formatDateRange(startDate: string, endDate?: string): string {
 
 		</div>
 
+		<script is:inline src="/print-ready.js"></script>
+
 		<!-- Print Button (hidden in print) -->
 		<div class="no-print fixed bottom-4 right-4">
 			<button 
-				onclick="window.print()" 
-				class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow-lg transition-colors"
+				onclick="printWhenImagesReady(this)" 
+				class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow-lg transition-colors disabled:opacity-70 disabled:cursor-wait"
 			>
 				Print CV
 			</button>
